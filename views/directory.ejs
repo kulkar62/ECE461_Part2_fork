@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Files</title>
+  </head>
+  <body>
+    <h1>Directory</h1>
+    <ul>
+      <% let files = locals.files %>
+      <!-- <% let dependencyMetric = locals.dependencyMetric %> -->
+      <% for (let i = 0; i < files.length; i++) { %>
+        <li>
+          <a href="/download/<%= files[i].filename %>"><%= files[i].filename %></a>
+          <a><%= dependencyMetric %></a>
+          <a><%= pullRequestMetric %></a>
+          <!-- <a><%= dependencyMetric %></a> -->
+        </li>
+      <% } %>
+    </ul>
+  </body>
+</html>
