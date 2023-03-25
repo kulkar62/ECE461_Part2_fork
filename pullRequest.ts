@@ -3,58 +3,64 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const octokit = new Octokit({
-  auth: `token `,
+  auth: `token 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`,
   version: "latest",
 });
 
 async function pullRequestRating(owner, repo) {
-  //query for git repo based off of specific owner and repo
+    //query for git repo based off of specific owner and repo
     const pullRequestsResponse = await octokit.pulls.list({
-        owner,
-        repo,
+      owner,
+      repo,
     });
+
 
     //initialize vars
     let reviewedLines = 0
     let totalLines = 0
 
-  //iterate through all the pull requests
-  for (const pullRequest of pullRequestsResponse.data) {
-    const pullRequestResponse = await octokit.pulls.get({
-      owner,
-      repo,
-      pull_number: pullRequest.number,
-    });
+    //iterate through all the pull requests
+    for (const pullRequest of pullRequestsResponse.data) {
+      const pullRequestResponse = await octokit.pulls.get({
+        owner,
+        repo,
+        pull_number: pullRequest.number,
+      });
 
-    //find diff between pull requests
-    const diffUrl = pullRequestResponse.data.diff_url;
-    const diffResponse = await octokit.request({
-      url: diffUrl,
-    });
+      //find diff between pull requests
+      const diffUrl = pullRequestResponse.data.diff_url;
+      const diffResponse = await octokit.request({
+        url: diffUrl,
+      });
 
 
-    const diff = diffResponse.data;
-    const lines = diff.split("\n");
+      const diff = diffResponse.data;
+      const lines = diff.split("\n");
 
-    //see which lines are reviewed through pull request + code review
-    for (const line of lines) {
-      if (line.startsWith("+") && !line.startsWith("+++")) {
-        totalLines++;
-        if (line.includes("//")) {
-          continue;
+      //see which lines are reviewed through pull request + code review
+      for (const line of lines) {
+        if (line.startsWith("+") && !line.startsWith("+++")) {
+          totalLines++;
+          if (line.includes("//")) {
+            continue;
+          }
+          reviewedLines++;
         }
-        reviewedLines++;
-      }
-      if (line.startsWith("-") && !line.startsWith("---")) {
-        totalLines++;
+        if (line.startsWith("-") && !line.startsWith("---")) {
+          totalLines++;
+        }
       }
     }
-  }
 
-  //compute the fraction
-  const fractionReviewed = reviewedLines / totalLines;
-  console.log(`Fraction of code reviewed: ${fractionReviewed}`);
-  return (fractionReviewed)
+    //compute the fraction
+
+    const fractionReviewed = reviewedLines / totalLines;
+    if (isNaN(fractionReviewed)){
+      console.log("0.0")
+      return ("0.0")
+    }
+    console.log(fractionReviewed);
+    return (fractionReviewed)
 }
 
-pullRequestRating("nullivex", "nodist")
+pullRequestRating("nidhikunigal", "PS_Group6")
