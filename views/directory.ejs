@@ -11,10 +11,20 @@
       <% for (let i = 0; i < files.length; i++) { %>
         <li>
           <a href="/download/<%= files[i].filename %>"><%= files[i].filename %></a>
-          <a><%= dependencyMetric %></a>
-          <a><%= pullRequestMetric %></a>
-          <!-- <a><%= dependencyMetric %></a> -->
         </li>
+        <p>
+          Ramp Up Score: <%= files[i].rampUpScore %><br>
+          Correctness: <%= files[i].correctnessScore %><br>
+          Bus Factor: <%= files[i].busFactorScore %><br>
+          Responsive Maintainer: <%= files[i].respScore %><br>
+          License Compatibility: <%= files[i].licenseScore %><br>
+          Dependency Metric: <%= files[i].dependencyMetric %><br>
+          Pull Request Metric: <%= files[i].pullRequestMetric %><br><br>
+        </p>
+        <!-- <a> Dependency Metric: </a>
+        <a><%= files[i].dependencyMetric %></a>
+        <a> Pull Request Metric: </a>
+        <a><%= files[i].pullRequestMetric %></a> -->
       <% } %>
     </ul>
   </body>
