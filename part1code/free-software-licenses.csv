@@ -1,0 +1,110 @@
+name,short_name,url
+GNU General Public License (GPL) version 3,GNUGPLv3,https://www.gnu.org/licenses/gpl.html
+GNU General Public License (GPL) version 2,GPLv2,https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+GNU Lesser General Public License (LGPL) version 3,LGPLv3,https://www.gnu.org/licenses/lgpl.html
+GNU Lesser General Public License (LGPL) version 2.1,LGPLv2.1,https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+GNU Affero General Public License (AGPL) version 3,AGPLv3.0,https://www.gnu.org/licenses/agpl.html
+GNU All-Permissive License,GNUAllPermissive,https://www.gnu.org/prep/maintain/html_node/License-Notices-for-Other-Files.html
+"Apache License, Version 2.0",apache2,http://directory.fsf.org/wiki/License:Apache2.0
+Artistic License 2.0,ArtisticLicense2,http://directory.fsf.org/wiki/License:ArtisticLicense2.0
+Clarified Artistic License,ClarifiedArtisticLicense,http://gianluca.dellavedova.org/2011/01/03/clarified-artistic-license/
+Berkeley Database License,BerkeleyDB,http://directory.fsf.org/wiki/License:Sleepycat
+Boost Software License,boost,http://directory.fsf.org/wiki/License:Boost1.0
+Modified BSD license,ModifiedBSD,http://directory.fsf.org/wiki/License:BSD_3Clause
+CC0,CC0,http://directory.fsf.org/wiki/License:CC0
+CeCILL version 2,CeCILL,https://directory.fsf.org/wiki/License:CeCILLv2
+The Clear BSD License,clearbsd,http://directory.fsf.org/wiki/License:ClearBSD
+Cryptix General License,CryptixGeneralLicense,http://directory.fsf.org/wiki/License:CryptixGL
+eCos license version 2.0,eCos2.0,http://directory.fsf.org/wiki/License:ECos2.0
+Educational Community License 2.0,ECL2.0,http://directory.fsf.org/wiki/License:ECL2.0
+"Eiffel Forum License, version 2",Eiffel,http://directory.fsf.org/wiki/License:EFLv2
+EU DataGrid Software License,EUDataGrid,http://directory.fsf.org/wiki/License:EUDataGrid
+Expat License,Expat,http://directory.fsf.org/wiki/License:Expat
+FreeBSD license,FreeBSD,http://directory.fsf.org/wiki?title=License:FreeBSD
+Freetype Project License,freetype,http://directory.fsf.org/wiki/License:FreeType
+Historical Permission Notice and Disclaimer,HPND,http://directory.fsf.org/wiki/License:Historical_Permission_Notice_and_Disclaimer
+License of the iMatix Standard Function Library,iMatix,http://directory.fsf.org/wiki?title=License:SFL
+License of imlib2,imlib,http://directory.fsf.org/wiki/License:Imlib2
+Independent JPEG Group License,ijg,http://directory.fsf.org/wiki?title=License:JPEG
+Informal license,informal,
+Intel Open Source License,intel,http://directory.fsf.org/wiki/License:IntelACPI
+ISC License,ISC,http://directory.fsf.org/wiki/License:ISC
+Mozilla Public License (MPL) version 2.0,MPL-2.0,http://directory.fsf.org/wiki/License:MPLv2.0
+NCSA/University of Illinois Open Source License,NCSA,http://directory.fsf.org/wiki/License:IllinoisNCSA
+License of Netscape JavaScript,NetscapeJavaScript,
+"OpenLDAP License, Version 2.7",newOpenLDAP,http://directory.fsf.org/wiki/License:OpenLDAPv2.7
+License of Perl 5 and below,PerlLicense,
+Public Domain,PublicDomain,http://directory.fsf.org/wiki/License:PublicDomain
+"License of Python 2.0.1, 2.1.1, and newer versions",Python,http://directory.fsf.org/wiki?title=License:Python2.0.1
+License of Python 1.6a2 and earlier versions,Python1.6a2,http://directory.fsf.org/wiki?title=License:Python1.6a2
+License of Ruby,Ruby,http://directory.fsf.org/wiki/License:Ruby
+"SGI Free Software License B, version 2.0",SGIFreeB,http://directory.fsf.org/wiki/License:SGIFreeBv2
+Standard ML of New Jersey Copyright License,StandardMLofNJ,http://directory.fsf.org/wiki/License:StandardMLofNJ
+"Unicode, Inc. License Agreement for Data Files and Software",Unicode,http://directory.fsf.org/wiki/License:Unicode
+Universal Permissive License (UPL),UPL,http://directory.fsf.org/wiki/License:Universal_Permissive_License
+The Unlicense,Unlicense,http://directory.fsf.org/wiki/License:TheUnlicense
+"License of Vim, Version 6.1 or later",Vim,http://directory.fsf.org/wiki/License:Vim7.2
+W3C Software Notice and License,W3C,http://directory.fsf.org/wiki/License:W3C_31Dec2002
+License of WebM,WebM,http://directory.fsf.org/wiki/License:WebM
+"WTFPL, Version 2",WTFPL,http://sam.zoy.org/wtfpl/COPYING
+WxWidgets License,Wx,
+X11 License,X11License,http://directory.fsf.org/wiki/License:X11
+XFree86 1.1 License,XFree861.1License,http://directory.fsf.org/wiki/License:XFree86_1.1
+License of ZLib,ZLib,http://directory.fsf.org/wiki/License:Zlib
+"Zope Public License, versions 2.0 and 2.1",Zope2.0,http://directory.fsf.org/wiki?title=License:ZopePLv2.1
+Affero General Public License version 1,AGPLv1.0,http://directory.fsf.org/wiki/License:AGPLv1
+"Academic Free License, all versions through 3.0",AcademicFreeLicense,http://directory.fsf.org/wiki/License:AFLv3
+"Apache License, Version 1.1",apache1.1,http://directory.fsf.org/wiki/License:Apache1.1
+"Apache License, Version 1.0",apache1,http://directory.fsf.org/wiki/License:Apache1.0
+"Apple Public Source License (APSL), version 2",apsl2,http://directory.fsf.org/wiki/License:APSLv2.0
+BitTorrent Open Source License,bittorrent,http://directory.fsf.org/wiki/License:BitTorrentOSL1.1
+Original BSD license,OriginalBSD,http://directory.fsf.org/wiki/License:BSD_4Clause
+"Common Development and Distribution License (CDDL), version 1.0",CDDL,http://directory.fsf.org/wiki/License:CDDLv1.0
+Common Public Attribution License 1.0 (CPAL),CPAL,https://www.socialtext.net/open/cpal_license_in_wikitext
+Common Public License Version 1.0,CommonPublicLicense10,http://directory.fsf.org/wiki/License:CPLv1.0
+Condor Public License,Condor,http://directory.fsf.org/wiki?title=License:Condor1.1
+Eclipse Public License Version 1.0,EPL,http://directory.fsf.org/wiki/License:EPLv1.0
+European Union Public License (EUPL) version 1.1,EUPL,http://directory.fsf.org/wiki/License:EUPLv1.1
+Gnuplot license,gnuplot,http://directory.fsf.org/wiki/License:Gnuplot
+"IBM Public License, Version 1.0",IBMPL,http://directory.fsf.org/wiki/License:IBMPLv1.0
+"Jabber Open Source License, Version 1.0",josl,http://directory.fsf.org/wiki/License:JabberOSLv1.0
+LaTeX Project Public License 1.3a,LPPL-1.3a,http://directory.fsf.org/wiki/License:LPPLv1.3a
+LaTeX Project Public License 1.2,LPPL-1.2,http://directory.fsf.org/wiki/License:LPPLv1.2
+Lucent Public License Version 1.02 (Plan 9 license),lucent102,http://directory.fsf.org/wiki/License:LucentPLv1.02
+Microsoft Public License (Ms-PL),ms-pl,http://directory.fsf.org/wiki/License:MsPL
+Microsoft Reciprocal License (Ms-RL),ms-rl,http://directory.fsf.org/wiki/License:MsRL
+Mozilla Public License (MPL) version 1.1,MPL,http://directory.fsf.org/wiki/License:MPLv1.1
+"Netizen Open Source License (NOSL), Version 1.0",NOSL,http://directory.fsf.org/wiki/License:NOSLv1.0
+Netscape Public License (NPL),NPL,http://directory.fsf.org/wiki?title=License:NPLv1.1
+Nokia Open Source License,Nokia,http://directory.fsf.org/wiki/License:NokOSv1.0a
+"Old OpenLDAP License, Version 2.3",oldOpenLDAP,http://directory.fsf.org/wiki/License:OpenLDAPv2.3
+"Open Software License, all versions through 3.0",OSL,http://directory.fsf.org/wiki/License:OSLv3.0
+OpenSSL license,OpenSSL,http://directory.fsf.org/wiki/License:OpenSSL
+"Phorum License, Version 2.0",Phorum,http://directory.fsf.org/wiki/License:Phorum2.0
+"PHP License, Version 3.01",PHP-3.01,http://directory.fsf.org/wiki/License:PHPv3.01
+License of Python 1.6b1 through 2.0 and 2.1,PythonOld,http://directory.fsf.org/wiki/License:Python1.6b1
+"Q Public License (QPL), Version 1.0",QPL,http://directory.fsf.org/wiki/License:QPLv1.0
+"RealNetworks Public Source License (RPSL), Version 1.0",RPSL,http://directory.fsf.org/wiki/License:RPSLv1.0
+Sun Industry Standards Source License 1.0,SISSL,http://www.openoffice.org/licenses/sissl_license.html
+Sun Public License,SPL,http://directory.fsf.org/wiki/License:SPLv1.0
+License of xinetd,xinetd,http://directory.fsf.org/wiki/License:Xinetd
+Yahoo! Public License 1.1,Yahoo,http://directory.fsf.org/wiki/License:YPLv1.1
+"Zend License, Version 2.0",Zend,http://directory.fsf.org/wiki/License:ZELv2.0
+Zimbra Public License 1.3,Zimbra,http://www.zimbra.com/license/zimbra-public-license-1-3.html
+Zope Public License version 1,Zope,http://web.archive.org/web/20000816090640/http://www.zope.org/Resources/ZPL
+GNU Free Documentation License,FDL,https://www.gnu.org/licenses/fdl.html
+FreeBSD Documentation License,FreeBSDDL,http://directory.fsf.org/wiki?title=License:FreeBSD
+"Apple's Common Documentation License, Version 1.0",ACDL,http://fedoraproject.org/wiki/Licensing/Common_Documentation_License
+"Open Publication License, Version 1.0",OpenPublicationL,http://opencontent.org/openpub/
+GNU General Public License,GPLOther,https://www.gnu.org/licenses/gpl.html
+GNU Free Documentation License,FDLOther,https://www.gnu.org/licenses/fdl.html
+Creative Commons Attribution 4.0 license,ccby,http://creativecommons.org/licenses/by/4.0/legalcode
+Creative Commons Attribution-Sharealike 4.0 license,ccbysa,http://creativecommons.org/licenses/by-sa/4.0/legalcode
+Design Science License (DSL),dsl,https://www.gnu.org/licenses/dsl.html
+Free Art License,FreeArt,https://directory.fsf.org/wiki/License:Free-Art-L-v1.3
+Open Database license,ODbl,http://directory.fsf.org/wiki/License:ODbl
+GNU General Public License,GPLFonts,https://www.gnu.org/licenses/gpl.html
+Arphic Public License,Arphic,http://ftp.gnu.org/gnu/non-gnu/chinese-fonts-truetype/LICENSE
+License of the ec fonts for LaTeX,ecfonts,http://directory.fsf.org/wiki/License:LaTeX_ecfonts
+IPA Font License,IPAFONT,http://directory.fsf.org/wiki/License:IPA_Font_License
+SIL Open Font License 1.1,SILOFL,http://directory.fsf.org/wiki/SIL_Open_Font_License_1.1

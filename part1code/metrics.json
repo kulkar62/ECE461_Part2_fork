@@ -1,0 +1,32 @@
+[
+    {
+        "metric": "RAMP_UP_SCORE",
+        "api": "rest",
+        "filepath": "./api.ts",
+        "line": "line 188, 196"
+    },
+    {
+        "metric": "CORRECTNESS_SCORE",
+        "api": "rest",
+        "filepath": "./api.ts",
+        "line": "line 172"
+    },
+    {
+        "metric": "BUS_FACTOR_SCORE",
+        "api": "rest",
+        "filepath": "./api.ts",
+        "line": "line 151"
+    },
+    {
+        "metric": "RESPONSIVE_MAINTAINER_SCORE",
+        "api": "rest",
+        "filepath": "./api.ts",
+        "line": "line 172"
+    },
+    {
+        "metric": "LICENSE_SCORE",
+        "api": "graphql",
+        "filepath": "./api.ts",
+        "line": "line 161"
+    }
+]

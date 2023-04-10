@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <h1>Upload File</h1>
+    <h1>Upload Package</h1>
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <input type="file" name="zipfile">
+        <label for="githubURL">Enter this package's github URL:</label>
+        <input type="text" id="githubURL" name="githubURL">
         <input type="submit">
 
     </form>
