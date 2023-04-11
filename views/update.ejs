@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <h1>Upload Package</h1>
-    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <% let file = locals.file %>
+    <h1>Update <%= file.filename %></h1>
+    <form method="POST" action="/update/<%= file.filename %>" enctype="multipart/form-data">
         <input type="file" name="zipfile">
         <label for="githubURL">Enter this package's github URL:</label>
         <input type="text" id="githubURL" name="githubURL">

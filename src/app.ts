@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { GridFSBucket } from 'mongodb';
+import { GridFSBucket, ObjectId } from 'mongodb';
 import { MongoClient } from 'mongodb';
 import * as GridFSStorage from 'multer-gridfs-storage';
 import * as dotenv from 'dotenv'
@@ -41,24 +41,111 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.get('/home', (req, res) => {
+    res.render('home');
+});
+
+app.get('/filepage/:filename', async (req, res) => {
+    const filename = req.params.filename;
+    const collection = db.collection('uploads.files');
+    const filter = { filename: filename };
+    const file = await collection.findOne(filter)
+    res.render('filepage', {file});    
+});
+
 app.get('/directory', async (req, res) => {
     
     try {
         const collection = db.collection('uploads.files');
         const files = await collection.find().toArray();
-
-
-        // Needs to be in a loop 
-        const dependencyMetric = await dependency("nullivex", "nodist", "3.6.2")
-        // const dependencyMetric = -1
-        const pullRequestMetric = await pullRequestRating("nidhikunigal", "PS_Group6")
-        // res.render('directory', { files});
-        res.render('directory', { files, dependencyMetric, pullRequestMetric});
+        res.render('directory', { files });
     } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving the files.');
     }
   });
+
+app.get('/update/:filename', async (req, res) => {
+
+    const filename = req.params.filename;
+    const collection = db.collection('uploads.files');
+    const filter = { filename: filename };
+    const file = await collection.findOne(filter)
+
+    res.render('update', {file});
+});
+
+app.post('/update/:filename', upload.array('zipfile'), async (req, res) => {
+
+    const githubURL = req.body.githubURL
+
+    const isValidGithubUrl = (url: string): boolean => /^https?:\/\/(www\.)?github\.com\/.+/.test(url);
+
+    if(isValidGithubUrl(githubURL))
+    {
+        const filenameOld = req.params.filename;
+
+        const collection = db.collection('uploads.files');
+        const files = await collection.find().toArray();
+        const fileNew = files[files.length-1]
+
+        const fileNewId = fileNew._id
+
+
+        const deleteFilter = {
+            $and: [{filename: filenameOld},
+                {_id: { $ne: new ObjectId(fileNewId) }}
+            ]
+        }
+
+        await collection.findOneAndDelete(deleteFilter)
+
+
+
+
+        const result = extractOwnerAndRepo(githubURL)
+        const owner = result?.owner ?? ''
+        const repo = result?.repo ?? ''
+
+        // const collection = db.collection('uploads.files');
+        // const files = await collection.find().toArray();
+        const file = files[files.length-1]
+
+        // const dependencyMetric = await dependency(owner, repo, "3.6.2")
+        const dependencyMetric = -1
+        // const pullRequestMetric = await pullRequestRating(owner, repo)
+        const pullRequestMetric = -1
+
+
+        const part1Metrics = await getMetrics(githubURL)
+        const netScore = part1Metrics.netScore
+        const rampUpScore = part1Metrics.rampUpScore
+        const correctnessScore = part1Metrics.correctnessScore
+        const busFactorScore = part1Metrics.busFactorScore
+        const respScore = part1Metrics.respScore
+        const licenseScore = part1Metrics.licenseScore
+
+
+
+        const filter = { _id: file._id };
+
+        
+
+        const update = {$set: {owner: owner, repo: repo, netScore: netScore, rampUpScore: rampUpScore, 
+            correctnessScore: correctnessScore, busFactorScore: busFactorScore, respScore: respScore, 
+            licenseScore: licenseScore, dependencyMetric: dependencyMetric, pullRequestMetric: pullRequestMetric}}
+
+        await collection.updateOne(filter, update)
+
+        res.redirect('/home')
+
+    }
+
+    else
+        res.redirect('/home')
+
+
+});
 
 
 app.get('/upload', (req, res) => {
@@ -67,50 +154,52 @@ app.get('/upload', (req, res) => {
 
 app.post('/upload', upload.array('zipfile'), async (req, res) => {
     const githubURL = req.body.githubURL
-    const result = extractOwnerAndRepo(githubURL)
-    const owner = result?.owner ?? ''
-    const repo = result?.repo ?? ''
 
-    const collection = db.collection('uploads.files');
-    const files = await collection.find().toArray();
-    const file = files[files.length-1]
+    const isValidGithubUrl = (url: string): boolean => /^https?:\/\/(www\.)?github\.com\/.+/.test(url);
 
-    // const dependencyMetric = await dependency(owner, repo, "3.6.2")
-    const dependencyMetric = -1
-    // const pullRequestMetric = await pullRequestRating(owner, repo)
-    const pullRequestMetric = -1
+    if(isValidGithubUrl(githubURL))
+    {
+        const result = extractOwnerAndRepo(githubURL)
+        const owner = result?.owner ?? ''
+        const repo = result?.repo ?? ''
 
+        const collection = db.collection('uploads.files');
+        const files = await collection.find().toArray();
+        const file = files[files.length-1]
 
-    const part1Metrics = await getMetrics(githubURL)
-    const netScore = part1Metrics.netScore
-    const rampUpScore = part1Metrics.rampUpScore
-    const correctnessScore = part1Metrics.correctnessScore
-    const busFactorScore = part1Metrics.busFactorScore
-    const respScore = part1Metrics.respScore
-    const licenseScore = part1Metrics.licenseScore
+        // const dependencyMetric = await dependency(owner, repo, "3.6.2")
+        const dependencyMetric = -1
+        // const pullRequestMetric = await pullRequestRating(owner, repo)
+        const pullRequestMetric = -1
 
 
+        const part1Metrics = await getMetrics(githubURL)
+        const netScore = part1Metrics.netScore
+        const rampUpScore = part1Metrics.rampUpScore
+        const correctnessScore = part1Metrics.correctnessScore
+        const busFactorScore = part1Metrics.busFactorScore
+        const respScore = part1Metrics.respScore
+        const licenseScore = part1Metrics.licenseScore
 
-    const filter = { _id: file._id };
-    // const ownerUpdate = { $set: { owner: owner} };
-    // const repoUpdate = { $set: { repo: repo } };
-    // const dependencyUpdate = { $set: { dependencyMetric: dependencyMetric} };
-    // const pullRequestUpdate = { $set: { pullRequestMetric: pullRequestMetric} };
-    
 
-    const update = {$set: {owner: owner, repo: repo, netScore: netScore, rampUpScore: rampUpScore, 
-        correctnessScore: correctnessScore, busFactorScore: busFactorScore, respScore: respScore, 
-        licenseScore: licenseScore, dependencyMetric: dependencyMetric, pullRequestMetric: pullRequestMetric}}
+
+        const filter = { _id: file._id };
+
+        
+
+        const update = {$set: {owner: owner, repo: repo, netScore: netScore, rampUpScore: rampUpScore, 
+            correctnessScore: correctnessScore, busFactorScore: busFactorScore, respScore: respScore, 
+            licenseScore: licenseScore, dependencyMetric: dependencyMetric, pullRequestMetric: pullRequestMetric}}
 
         await collection.updateOne(filter, update)
 
-    // await collection.updateOne(filter, ownerUpdate)
-    // await collection.updateOne(filter, repoUpdate)
-    // await collection.updateOne(filter, dependencyUpdate)
-    // await collection.updateOne(filter, pullRequestUpdate)
+        res.redirect('/home')
 
+    }
 
-    res.send('Upload worked')
+    else
+        res.redirect('/home')
+    
 });
 
 app.get('/reset', async (req, res) => {
@@ -124,6 +213,16 @@ app.get('/download/:filename', async (req, res) => {
     const downloadStream = bucket.openDownloadStreamByName(filename);
     downloadStream.pipe(res);
   
+});
+
+app.get('/rate/:filename', async (req, res) => {
+    const filename = req.params.filename;
+    const collection = db.collection('uploads.files');
+    const filter = { filename: filename };
+    const file = await collection.findOne(filter)
+
+
+    res.render('rate', {file});    
 });
 
 function extractOwnerAndRepo(githubLink: string): { owner: string; repo: string } | null {
