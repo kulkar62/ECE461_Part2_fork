@@ -1,0 +1,29 @@
+{
+  "name": "part2redo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "tsc -p . && node dst/app.js",
+    "startnew": "tsc -p . && node --max-old-space-size=8192 dst/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc -p ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^19.0.7",
+    "ajv": "^8.12.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "nodemon": "^2.0.22",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/validator": "^13.7.15"
+  }
+}
