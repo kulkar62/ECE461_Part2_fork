@@ -6,10 +6,10 @@ async function runCommand(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
         exec('./run githubURL.txt', (error, stdout, stderr) => {
             if (error) {
-              console.error(`exec error: ${error}`);
-              reject(error);
+                console.error(`exec error: ${error}`);
+                reject(error);
             } else {
-              resolve(stdout);
+                resolve(stdout);
             }
         });
     });
@@ -20,6 +20,7 @@ async function runCommand(): Promise<string> {
 export async function getMetrics(githubURL: string){
     // write githubURL to part1code/githubURL.txt
     fs.writeFileSync('./part1code/githubURL.txt', githubURL);
+    // fs.writeFileSync('./part1code/githubURL.txt', 'https://github.com/prettier/prettier');
 
 
     // run part 1 code, save output, return output
@@ -33,12 +34,11 @@ export async function getMetrics(githubURL: string){
     let licenseScore;
 
     const stdout = await runCommand();
-    // console.log(stdoutData)
-
     process.chdir('../');
 
     var scoresString = stdout.substring(0, stdout.indexOf("}") + 1);
     scoresString = scoresString.replace(/'/g, '"');
+    // console.log(scoresString)
     const scores = JSON.parse(scoresString)
     netScore = scores.NET_SCORE
     rampUpScore = scores.RAMP_UP_SCORE

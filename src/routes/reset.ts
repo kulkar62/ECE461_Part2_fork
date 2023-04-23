@@ -8,7 +8,7 @@ const verifyAdmin = require('../middleware/verifyAdmin')
 router.delete('/reset', verifyAdmin, async (req: Request, res: Response, next: NextFunction) => {
 
     await Package.deleteMany()
-    res.send('Registry has been reset successfully')
+    res.status(200).send('Registry has been reset successfully')
 
 });
 

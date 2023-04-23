@@ -38,7 +38,7 @@ module.exports = function (req: Request | any, res: Response, next: NextFunction
     }
 
     else
-        res.status(401).send('You do not have an admin token')
+        res.status(401).send('You do not have permission to reset the registry')
 
 
     

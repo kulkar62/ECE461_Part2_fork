@@ -8,6 +8,14 @@ interface IPackage {
     Content: string;
     URL: string;
     JSProgram: string;
+    NetScore: Number;
+    PullRequestMetric: Number;
+    DependencyMetric: Number;
+    RampUpScore: Number;
+    CorrectnessScore: Number;
+    BusFactorScore: Number;
+    RespScore: Number;
+    LicenseScore: Number;
 
 }
 
@@ -36,7 +44,39 @@ const packageSchema = new Schema<IPackage>({
     JSProgram: {
         type: String,
         required: false
-    }
+    },
+    NetScore: {
+        type: Number,
+        required: true
+    },
+    PullRequestMetric: {
+        type: Number,
+        required: true
+    },
+    DependencyMetric: {
+        type: Number,
+        required: true
+    },
+    RampUpScore: {
+        type: Number,
+        required: true
+    },
+    CorrectnessScore: {
+        type: Number,
+        required: true
+    },
+    BusFactorScore: {
+        type: Number,
+        required: true
+    },
+    RespScore: {
+        type: Number,
+        required: true
+    },
+    LicenseScore: {
+        type: Number,
+        required: true
+    },
 
 });
 

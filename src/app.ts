@@ -28,10 +28,12 @@ app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFuncti
 
 const authenticateRoute = require('./routes/authenticate')
 const packageRoute = require('./routes/package')
+const packagesRoute = require('./routes/packages')
 const resetRoute = require('./routes/reset')
 
 app.use('/', authenticateRoute)
 app.use('/', packageRoute)
+app.use('/', packagesRoute)
 app.use('/', resetRoute)
 
 
