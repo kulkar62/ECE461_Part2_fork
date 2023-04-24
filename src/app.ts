@@ -1,15 +1,33 @@
 import express, {Application, Request, Response, NextFunction, ErrorRequestHandler} from 'express';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv'
+
 dotenv.config()
 const bodyParser = require('body-parser');
 
 mongoose.connect(process.env.MONGO_URI!);
 
-
 const app: Application = express()
 
 
+//----
+app.set('view engine', 'ejs');
+app.get('/', (req, res) => {
+    res.render('index');
+  });
+  
+app.get('/home', async (req, res) => {
+    res.render('home');
+});
+
+app.get('/directory', async (req, res) => {
+    res.render('home');
+});
+
+app.get('/upload', async (req, res) => {
+    res.render('home');
+});
+//------
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

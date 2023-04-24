@@ -28,8 +28,8 @@ router.post('/package', verifyToken, validPostPackage, async (req: Request, res:
         exec(`python3 repoHandler.py Content`,  async (error, stdout, stderr) => 
         {
 
-            try
-            {
+           // try
+           // {
                 fs.unlinkSync('content.txt')
                 
                 const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
@@ -110,14 +110,14 @@ router.post('/package', verifyToken, validPostPackage, async (req: Request, res:
                 }
             } 
             
-            catch(err)
+            /*catch(err)
             {
                 res.status(400).send('No package.json found')
             }
             
 
 
-        });
+        }*/ );
         
         
     }
@@ -311,11 +311,11 @@ async function calculateMetrics(githubURL: string)
 
     
 
-    // const pullRequestMetric = await pullRequestRating(owner, repo)
-    // const dependencyMetric = await dependency(owner, repo)
+    const pullRequestMetric = await pullRequestRating("prettier", "prettier")
+    const dependencyMetric = await dependency("prettier", "prettier")
 
-    const pullRequestMetric = 0.5
-    const dependencyMetric = 0.5
+    // const pullRequestMetric = 0.5
+    // const dependencyMetric = 0.5
     
 
 
