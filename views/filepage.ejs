@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>File Page</title>
+    </head>
+    <% let file = locals.file %>
+    <h1><%= file.filename %></h1>
+    <p>
+        Ramp Up Score: <%= file.rampUpScore %><br>
+        Correctness: <%= file.correctnessScore %><br>
+        Bus Factor: <%= file.busFactorScore %><br>
+        Responsive Maintainer: <%= file.respScore %><br>
+        License Compatibility: <%= file.licenseScore %><br>
+        Dependency Metric: <%= file.dependencyMetric %><br>
+        Pull Request Metric: <%= file.pullRequestMetric %><br><br>
+    </p>
+
+      <a href="/download/<%= file.filename %>">
+        <button>Download</button>
+      </a><br><br><br>
+
+      <a href="/update/<%= file.filename %>">
+        <button>Update</button>
+      </a><br><br><br>
+
+      <a href="/home">
+        <button>Home Page</button>
+      </a><br><br><br>
+
+      <a href="/directory">
+        <button>Directory</button>
+      </a><br><br><br>
+</html>

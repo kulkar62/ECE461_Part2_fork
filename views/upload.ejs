@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+    <h1>Upload Package</h1>
+    <a href="/home">
+        <button>Home Page</button>
+    </a>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="zipfile">
+        <label for="githubURL">Enter this package's github URL:</label>
+        <input type="text" id="githubURL" name="githubURL">
+        <input type="submit">
+
+    </form><br><br>
+ 
+    <style>
+        body {
+            background-color: #bcd2bb;
+            font-family: Arial, sans-serif;
+            color: rgb(21, 13, 13);
+        }
+  
+        h1 {
+            text-align: center;
+            font-size: 48px;
+            margin-top: 50px;
+        }
+        button {
+                  background-color: #174b18;
+                  color: white;
+                  padding: 14px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-size: 18px;
+                  margin: 20px;
+              }
+  
+        button:hover {
+                  background-color: #2e8a31;
+            }
+        form {
+            background-color: #d0ddd0;
+                  color: white;
+                  padding: 14px 20px;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-size: 18px;
+                  margin: 20px; 
+        }
+        </style>
+
+
+</html>
