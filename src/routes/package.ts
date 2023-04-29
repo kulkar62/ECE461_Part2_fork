@@ -10,12 +10,16 @@ import { pullRequestRating } from '../metrics/pullRequestMetric';
 import { getMetrics } from '../metrics/part1handler';
 
 import { validPostPackage , validPutPackage, validPostRegex } from '../middleware/verifyRequest';
+import os from 'os'
+import {rimraf} from 'rimraf'
 
 router.post('/package', verifyToken, validPostPackage, async (req: Request, res: Response, next: NextFunction) => {
 
     const Content = req.body.Content
     const URL = req.body.URL
     const JSProgram = req.body.JSProgram
+
+    const tempdir = os.tmpdir()
 
     if(Content && URL)
     {
@@ -24,22 +28,31 @@ router.post('/package', verifyToken, validPostPackage, async (req: Request, res:
 
     else if(Content)
     {
-        fs.writeFileSync('content.txt', Content)
+        fs.writeFileSync(`${os.tmpdir()}/content.txt`, Content)
         exec(`python3 repoHandler.py Content`,  async (error, stdout, stderr) => 
         {
 
-           try
-           {
-                fs.unlinkSync('content.txt')
-                
-                const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+            try
+            {
+
+
+                // fs.unlinkSync('content.txt')
+                // const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                const jsonContent = fs.readFileSync(`${tempdir}/info.json`, 'utf-8');
                 const data = JSON.parse(jsonContent);
                 
                 const Name = data.Name
                 const Version = data.Version
                 const githubURL = data.URL
-                exec('rm -rf temp')
+                const reponame = data.reponame
+                // exec('rm -rf temp')
 
+                fs.unlinkSync(`${tempdir}/content.txt`)
+                fs.unlinkSync(`${tempdir}/repository.zip`)
+                fs.unlinkSync(`${tempdir}/info.json`)
+                rimraf(`${tempdir}/${reponame}`)
+
+                
                 let pullRequestMetric, dependencyMetric, rampUpScore, correctnessScore, busFactorScore, respScore, licenseScore, netScore
                 if(!githubURL)
                 {
@@ -124,19 +137,26 @@ router.post('/package', verifyToken, validPostPackage, async (req: Request, res:
 
     else if(URL)
     {
+       
         exec(`python3 repoHandler.py URL ${URL}`,  async (error, stdout, stderr) => 
         {
             try
             {
 
-                const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                // const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                const jsonContent = fs.readFileSync(`${tempdir}/info.json`, 'utf-8');
                 const data = JSON.parse(jsonContent);
                 
                 const Name = data.Name
                 const Version = data.Version
-                const Content = data.Content
+                const Content = fs.readFileSync(`${tempdir}/content.txt`)
                 
-                exec('rm -rf temp')
+                // exec('rm -rf temp')
+
+                fs.unlinkSync(`${tempdir}/repository.zip`)
+                fs.unlinkSync(`${tempdir}/info.json`)
+                fs.unlinkSync(`${tempdir}/content.txt`)
+                rimraf(`${tempdir}/cloningdirectory`)
 
                 const result = await calculateMetrics(URL)
 
@@ -311,8 +331,8 @@ async function calculateMetrics(githubURL: string)
 
     
 
-    const pullRequestMetric = await pullRequestRating("prettier", "prettier")
-    const dependencyMetric = await dependency("prettier", "prettier")
+    const pullRequestMetric = await pullRequestRating(owner, repo)
+    const dependencyMetric = await dependency(owner, repo)
 
     // const pullRequestMetric = 0.5
     // const dependencyMetric = 0.5

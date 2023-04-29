@@ -45,24 +45,33 @@ const dependencyMetric_1 = require("../metrics/dependencyMetric");
 const pullRequestMetric_1 = require("../metrics/pullRequestMetric");
 const part1handler_1 = require("../metrics/part1handler");
 const verifyRequest_1 = require("../middleware/verifyRequest");
+const os_1 = __importDefault(require("os"));
+const rimraf_1 = require("rimraf");
 router.post('/package', verifyToken, verifyRequest_1.validPostPackage, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const Content = req.body.Content;
     const URL = req.body.URL;
     const JSProgram = req.body.JSProgram;
+    const tempdir = os_1.default.tmpdir();
     if (Content && URL) {
         res.status(400).send('Content and URL cannot both be set');
     }
     else if (Content) {
-        fs.writeFileSync('content.txt', Content);
+        fs.writeFileSync(`${os_1.default.tmpdir()}/content.txt`, Content);
         (0, child_process_1.exec)(`python3 repoHandler.py Content`, (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                fs.unlinkSync('content.txt');
-                const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                // fs.unlinkSync('content.txt')
+                // const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                const jsonContent = fs.readFileSync(`${tempdir}/info.json`, 'utf-8');
                 const data = JSON.parse(jsonContent);
                 const Name = data.Name;
                 const Version = data.Version;
                 const githubURL = data.URL;
-                (0, child_process_1.exec)('rm -rf temp');
+                const reponame = data.reponame;
+                // exec('rm -rf temp')
+                fs.unlinkSync(`${tempdir}/content.txt`);
+                fs.unlinkSync(`${tempdir}/repository.zip`);
+                fs.unlinkSync(`${tempdir}/info.json`);
+                (0, rimraf_1.rimraf)(`${tempdir}/${reponame}`);
                 let pullRequestMetric, dependencyMetric, rampUpScore, correctnessScore, busFactorScore, respScore, licenseScore, netScore;
                 if (!githubURL) {
                     return res.status(400).send('Package.json does not have a URL');
@@ -124,12 +133,17 @@ router.post('/package', verifyToken, verifyRequest_1.validPostPackage, (req, res
     else if (URL) {
         (0, child_process_1.exec)(`python3 repoHandler.py URL ${URL}`, (error, stdout, stderr) => __awaiter(void 0, void 0, void 0, function* () {
             try {
-                const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                // const jsonContent = fs.readFileSync('./temp/info.json', 'utf-8');
+                const jsonContent = fs.readFileSync(`${tempdir}/info.json`, 'utf-8');
                 const data = JSON.parse(jsonContent);
                 const Name = data.Name;
                 const Version = data.Version;
-                const Content = data.Content;
-                (0, child_process_1.exec)('rm -rf temp');
+                const Content = fs.readFileSync(`${tempdir}/content.txt`);
+                // exec('rm -rf temp')
+                fs.unlinkSync(`${tempdir}/repository.zip`);
+                fs.unlinkSync(`${tempdir}/info.json`);
+                fs.unlinkSync(`${tempdir}/content.txt`);
+                (0, rimraf_1.rimraf)(`${tempdir}/cloningdirectory`);
                 const result = yield calculateMetrics(URL);
                 let pullRequestMetric, dependencyMetric, rampUpScore, correctnessScore, busFactorScore, respScore, licenseScore, netScore;
                 netScore = result.netScore;
@@ -239,8 +253,8 @@ function calculateMetrics(githubURL) {
         const result = extractOwnerAndRepo(githubURL);
         const owner = (_a = result === null || result === void 0 ? void 0 : result.owner) !== null && _a !== void 0 ? _a : '';
         const repo = (_b = result === null || result === void 0 ? void 0 : result.repo) !== null && _b !== void 0 ? _b : '';
-        const pullRequestMetric = yield (0, pullRequestMetric_1.pullRequestRating)("prettier", "prettier");
-        const dependencyMetric = yield (0, dependencyMetric_1.dependency)("prettier", "prettier");
+        const pullRequestMetric = yield (0, pullRequestMetric_1.pullRequestRating)(owner, repo);
+        const dependencyMetric = yield (0, dependencyMetric_1.dependency)(owner, repo);
         // const pullRequestMetric = 0.5
         // const dependencyMetric = 0.5
         const part1Metrics = yield (0, part1handler_1.getMetrics)(githubURL);

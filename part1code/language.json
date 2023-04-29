@@ -1,5 +1,11 @@
 {
-  "TypeScript": 19801,
-  "Python": 14225,
-  "EJS": 3120
+  "JavaScript": 2740561,
+  "TypeScript": 194174,
+  "CSS": 116105,
+  "HTML": 105593,
+  "SCSS": 60440,
+  "Less": 40289,
+  "Vue": 30675,
+  "Handlebars": 27143,
+  "Shell": 519
 }
