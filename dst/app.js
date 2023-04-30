@@ -34,19 +34,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const mongodb_1 = require("mongodb");
+// import { MongoClient } from 'mongodb';
 const dotenv = __importStar(require("dotenv"));
+const Package_1 = __importDefault(require("./model/Package"));
+// import { dependency } from './metrics/dependencyMetric';
+// import { pullRequestRating } from './metrics/pullRequestMetric'
+// import { getMetrics } from './metrics/part1handler';
 dotenv.config();
 const bodyParser = require('body-parser');
-//is this the same database or no ?????
-const uri = (_a = process.env.MONGO_URI) !== null && _a !== void 0 ? _a : '';
-const client = new mongodb_1.MongoClient(uri);
-client.connect();
-const db = client.db();
 mongoose_1.default.connect(process.env.MONGO_URI);
 const app = (0, express_1.default)();
 //frontend 
@@ -55,16 +53,13 @@ app.get('/home', (req, res) => {
     res.render('home');
 });
 app.get('/filepage/:filename', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = yield collection.findOne(filter);
+    const strn = req.params.filename.toString();
+    const file = Package_1.default.find({ Name: strn });
     res.render('filepage', { file });
 }));
 app.get('/directory', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const collection = db.collection('uploads.files');
-        const files = yield collection.find().toArray();
+        const files = Package_1.default.find();
         res.render('directory', { files });
     }
     catch (error) {
@@ -72,21 +67,17 @@ app.get('/directory', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).send('An error occurred while retrieving the files.');
     }
 }));
-app.get('/update/:filename', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = yield collection.findOne(filter);
-    res.render('update', { file });
-}));
-app.get('/upload', (req, res) => {
-    res.render('upload');
-});
+// app.get('/update/:filename', async (req, res) => {
+//     const filename = req.params.filename.toString();
+//     const file = Package.find({Name: filename});
+//     res.render('update', {file})
+// });
+// app.get('/upload', (req, res) => {
+//     res.render('upload');
+// });
 app.get('/rate/:filename', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = yield collection.findOne(filter);
+    const filename = req.params.filename.toString();
+    const file = Package_1.default.find({ Name: filename });
     res.render('rate', { file });
 }));
 function extractOwnerAndRepo(githubLink) {

@@ -1,21 +1,15 @@
 import express, {Application, Request, Response, NextFunction, ErrorRequestHandler} from 'express';
 import mongoose from 'mongoose';
-import { MongoClient } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 import * as dotenv from 'dotenv'
 import Package from './model/Package';
 
-import { dependency } from './metrics/dependencyMetric';
-import { pullRequestRating } from './metrics/pullRequestMetric'
-import { getMetrics } from './metrics/part1handler';
+// import { dependency } from './metrics/dependencyMetric';
+// import { pullRequestRating } from './metrics/pullRequestMetric'
+// import { getMetrics } from './metrics/part1handler';
 
 dotenv.config()
 const bodyParser = require('body-parser');
-
-//is this the same database or no ?????
-const uri = process.env.MONGO_URI ?? ''
-const client = new MongoClient(uri);
-client.connect();
-const db = client.db();
 
 mongoose.connect(process.env.MONGO_URI!);
 
@@ -29,18 +23,15 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/filepage/:filename', async (req, res) => {
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = await collection.findOne(filter)
+    const strn = req.params.filename.toString()
+    const file = Package.find({Name: strn});
     res.render('filepage', {file});    
 });
 
 app.get('/directory', async (req, res) => {
 
     try {
-        const collection = db.collection('uploads.files');
-        const files = await collection.find().toArray();
+        const files = Package.find();
 
         res.render('directory', { files });
     } catch (error) {
@@ -49,27 +40,22 @@ app.get('/directory', async (req, res) => {
     }
   });
 
-app.get('/update/:filename', async (req, res) => {
+// app.get('/update/:filename', async (req, res) => {
 
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = await collection.findOne(filter)
+//     const filename = req.params.filename.toString();
+//     const file = Package.find({Name: filename});
 
-    res.render('update', {file});
-});
+//     res.render('update', {file})
+// });
 
 
-app.get('/upload', (req, res) => {
-    res.render('upload');
-});
+// app.get('/upload', (req, res) => {
+//     res.render('upload');
+// });
 
 app.get('/rate/:filename', async (req, res) => {
-    const filename = req.params.filename;
-    const collection = db.collection('uploads.files');
-    const filter = { filename: filename };
-    const file = await collection.findOne(filter)
-
+    const filename = req.params.filename.toString();
+    const file = Package.find({Name: filename});
 
     res.render('rate', {file});    
 });
