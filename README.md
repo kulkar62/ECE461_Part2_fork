@@ -1,6 +1,6 @@
 # NPM Clone
 Package management system, similar to npm or yarn. \
-Created using Express, MongoDB, and Google Cloud Platform.
+Created using Express, MongoDB, EJS, and Google Cloud Platform.
 
 Team Members: 
 Nidhi Kunigal (@nidhikunigal)
