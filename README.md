@@ -1,7 +1,7 @@
-# ECE461_Part2
-Part 2 for ECE 461 - Introduction to Software Engineering at Purdue University
+# NPM Clone
+Package management system, similar to npm or yarn. \
+Created using Express, MongoDB, and Google Cloud Platform.
 
 Team Members: 
 Nidhi Kunigal (@nidhikunigal)
 Anshul Kulkarni (@kulkar62)
-Riya Varshney (varshney00)
