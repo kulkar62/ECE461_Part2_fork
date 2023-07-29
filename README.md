@@ -1,5 +1,5 @@
 # NPM Clone
-Package management system, similar to npm or yarn. \
+Package management and rating system, similar to npm and OpenSSF Scorecard. \
 Created using Express, MongoDB, EJS, and Google Cloud Platform.
 
 Team Members: 
